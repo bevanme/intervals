@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Intervals and Timers</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+    <style>
+
+    </style>
+
+
+
+<!-- run something after 5 seconds that is a timeout -->
+<!-- run something every 5 seconds that is an interval -->
+    <script>
+        function buzzer() {
+            console.log('BUUUUZZZZZZ');
+        }
+        function buzzer2() {
+            console.log('ding ding');
+        }
+        function buzzer3() {
+            console.log('bark bark');
+        }
+ //       setTimeout(buzzer, 5000);
+ //       setInterval(buzzer2, 2000);
+
+        function setImmediateInterval(fcnToRun, ms) {
+            fcnToRun();
+            return setInterval(fcnToRun, ms);
+        }
+
+        const onGoingInterval = setImmediateInterval(buzzer2, 2000);
+
+        function destroy() {
+            document.body.innerHTML = `<p>DESTROYED</p>`;
+            clearInterval(onGoingInterval);
+        }
+
+//  to clear an interval, it must be saved to a variable.
+        let bombTimer = setTimeout(destroy, 10000);
+
+        window.addEventListener('click', function() {
+            console.log('you saved the world');
+            clearTimeout(bombTimer);
+            bombTimer = setTimeout(destroy, 10000);
+        });
+
+    </script>
+
+</body>
+
+</html>
